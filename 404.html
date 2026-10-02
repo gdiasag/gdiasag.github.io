@@ -1,0 +1,21 @@
+---
+layout: common
+title: gustavos.terminal/404
+permalink: /404.html
+---
+
+<header class="term">
+  {% include term-nav.html %}
+  {% include term-prompt.html cmd="bat -p" %} <span class="missing"></span>
+</header>
+<main class="content">
+  <p><span style="color: var(--red);">[bat error]</span>: <span class="missing">that file</span>: No such file or directory (os error 2)</p>
+</main>
+{% include term-footer.html %}
+<script>
+  let path = location.pathname.slice(1);
+  try {
+    path = decodeURIComponent(path);
+  } catch {}
+  for (const span of document.querySelectorAll(".missing")) span.textContent = path;
+</script>

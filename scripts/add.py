@@ -20,7 +20,9 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(
-    subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True)
+    subprocess.check_output(
+        ["git", "rev-parse", "--show-toplevel"], text=True
+    ).strip()
 )
 DATA = ROOT / "nix/data"
 PINS = ROOT / "npins/sources.json"
@@ -275,11 +277,11 @@ def main() -> None:
         return subparser
 
     _ = command("book", book, "a book in books/").add_argument(
-        "url", help="source URL", required=True
+        "url", help="source URL"
     )
     _ = command(
         "external-post", external_post, "a post published elsewhere"
-    ).add_argument("url", help="source URL", required=True)
+    ).add_argument("url", help="source URL")
     _ = command("post", post, "an empty post draft in notes/")
 
     slides = command(

@@ -94,4 +94,34 @@
     date = "2026-06-03";
     symlink = "https://www.cis.upenn.edu/~bcpierce/tapl";
   }
+  {
+    title = "Database Internals";
+    date = "2026-10-02";
+    symlink = "https://www.databass.dev/";
+  }
+  {
+    title = "Build an Orchestrator in Go (From Scratch)";
+    date = "2026-10-02";
+    symlink = "https://www.manning.com/books/build-an-orchestrator-in-go-from-scratch";
+  }
+  {
+    title = "Building Microservices: Designing Fine-Grained Systems";
+    date = "2026-10-02";
+    symlink = "https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018";
+  }
+  {
+    title = "Writing An Interpreter In Go";
+    date = "2026-10-02";
+    symlink = "https://interpreterbook.com";
+  }
+  {
+    title = "Building a Debugger: Write a Native X64 Debugger from Scratch";
+    date = "2026-10-02";
+    symlink = "https://nostarch.com/building-a-debugger";
+  }
+  {
+    title = "The Linux Memory Manager";
+    date = "2026-10-02";
+    symlink = "https://nostarch.com/linux-memory-manager";
+  }
 ]

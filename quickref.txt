@@ -4,11 +4,10 @@ title: gustavos.terminal/quickref.txt
 filetype: help
 render_with_liquid: false
 ---
+
 *quickref.txt*	For gustavos.terminal.  Last change: 2026 Oct 02
 
-
 		  TERMINAL REFERENCE MANUAL	  by Gustavo Aguiar
-
 
 			     Quick reference guide
 
