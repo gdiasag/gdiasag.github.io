@@ -2,7 +2,7 @@
   perSystem =
     { pkgs, lib, ... }:
     let
-      inherit (import ./utils.nix) fontFile;
+      inherit (import ./lib.nix) fontFile;
 
       family = "Commit Mono";
 
@@ -29,7 +29,7 @@
               font-weight: ${face.weight};
               font-style: ${face.style};
               font-display: swap;
-              src: url("fonts/${fontFile name}") format("woff2")
+              src: url("fonts/${fontFile name}") format("woff2");
             }
           '') faces
         )}
@@ -40,11 +40,11 @@
         mkdir -p $out/fonts
 
         cp ${partial} $out/_font.scss
-        
+
         ${lib.concatStrings (
           lib.mapAttrsToList (name: face: ''
             cp ${face.file} ${name}.ttf
-            woff2_compress ${name}.tff
+            woff2_compress ${name}.ttf
             mv ${name}.woff2 $out/fonts/${fontFile name}
           '') faces
         )}

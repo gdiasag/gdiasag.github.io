@@ -1,0 +1,19 @@
+{%- comment -%}
+  The . and .. of a listing, dated by their last change: . by its newest entry,
+  or the site's last change when it has none, and .. by the site's last change.
+
+  Optional Parameters:
+  * dates (array) - The dates of the listing's entries
+{%- endcomment -%}
+{%- assign updated = nil -%}
+{%- assign latest = 0 -%}
+{%- for date in include.dates -%}
+  {%- assign seconds = date | date: "%s" | plus: 0 -%}
+  {%- if seconds > latest -%}
+    {%- assign latest = seconds -%}
+    {%- assign updated = date -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign updated = updated | default: site.time -%}
+{% include ls-row.html class="mobile-hidden" mode="drwxr-xr-x" date=updated href="" name="." %}
+{% include ls-row.html class="mobile-hidden" mode="drwxr-xr-x" date=site.time href="/" name=".." %}

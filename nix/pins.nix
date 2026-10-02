@@ -1,5 +1,5 @@
 let
-  inherit (import ./utils.nix) timestamp;
+  inherit (import ./lib.nix) timestamp;
   inherit (builtins.fromJSON (builtins.readFile ../npins/sources.json)) pins;
 
   pin =
@@ -10,7 +10,7 @@ let
         hash,
         ...
       }:
-      assert repository.type == "Github";
+      assert repository.type == "GitHub";
       let
         # Rather than npins' own `fetchTarball`, for the commit's date.
         tree = builtins.fetchTree {

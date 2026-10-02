@@ -1,0 +1,246 @@
+@use "vars" as *;
+
+::selection {
+  background-color: var(--Visual-bg);
+  color: var(--Visual-fg, currentcolor);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+[data-file] > .highlight,
+[data-file] > .highlight pre {
+  margin: 0;
+  padding: 0;
+}
+
+.md [data-file] main > h1:first-child {
+  padding-top: $lh;
+}
+
+.md .highlight code {
+  counter-reset: line;
+  color: $body-text-color;
+}
+
+.highlight .line {
+  display: block;
+  min-height: $lh;
+}
+
+.number main .highlight .line {
+  position: relative;
+  padding-left: 4ch;
+  counter-increment: line;
+
+  &::before {
+    content: counter(line);
+    position: absolute;
+    left: 0;
+    width: 3ch;
+    text-align: right;
+    color: var(--LineNr-fg);
+  }
+}
+
+.cursorline main .highlight .line:hover {
+  background-color: var(--CursorLine-bg);
+
+  &::before {
+    color: var(--CursorLineNr-fg);
+  }
+}
+
+.nowrap main .highlight pre {
+  white-space: pre;
+  word-break: normal;
+  overflow-x: auto;
+}
+
+// A help file, as `:help` shows it. What it conceals before a tab keeps its
+// width, for the tab to end where it does in the file.
+[data-filetype="help"] main {
+  > .highlight,
+  > .highlight pre {
+    margin: 0;
+    padding: 0;
+  }
+
+  .concealed {
+    visibility: hidden;
+  }
+
+  .concealed.collapsed {
+    display: none;
+  }
+
+  a.markup-link:hover {
+    color: $background;
+    background-color: $link-color;
+  }
+}
+
+mark.search {
+  background-color: var(--Search-bg);
+  color: var(--Search-fg, currentcolor);
+
+  &.current {
+    background-color: var(--CurSearch-bg);
+    color: var(--CurSearch-fg, currentcolor);
+  }
+}
+
+body.site {
+  padding-bottom: calc(1ch + #{2 * $lh});
+}
+
+.vim-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  font-family: $font-family-code;
+  font-size: $font-size-base;
+  line-height: $lh;
+  color: $body-text-color;
+  background-color: $background;
+
+  &[hidden],
+  [hidden] {
+    display: none;
+  }
+}
+
+.md .vim-line,
+.vim-prompt {
+  min-height: $lh;
+  margin: 0;
+  padding: 0 1ch;
+  white-space: pre-wrap;
+}
+
+.vim-line {
+  &.error {
+    color: var(--ErrorMsg-fg);
+    background-color: var(--ErrorMsg-bg, transparent);
+  }
+
+  &.warning {
+    color: var(--WarningMsg-fg);
+  }
+}
+
+.vim-prompt {
+  display: flex;
+
+  input {
+    flex: 1;
+    padding: 0;
+    border: 0;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    caret-color: $cursor;
+  }
+}
+
+.md .vim-menu {
+  position: absolute;
+  bottom: $lh;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--Pmenu-fg);
+  background-color: var(--Pmenu-bg);
+
+  li {
+    padding: 0 1ch;
+
+    &::before {
+      content: none;
+    }
+
+    &.selected {
+      color: var(--PmenuSel-fg);
+      background-color: var(--PmenuSel-bg);
+    }
+  }
+}
+
+.lualine {
+  display: flex;
+  overflow: hidden;
+  white-space: pre;
+
+  @each $section in a, b, c, x, y, z {
+    .#{$section} {
+      color: var(--#{$section}-fg);
+      background-color: var(--#{$section}-bg);
+      font-weight: var(--#{$section}-weight, normal);
+    }
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  .c {
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fill {
+    flex: 1;
+    background-color: var(--c-bg);
+  }
+
+  @each $pair, $from, $to in (ab, a, b), (bc, b, c), (cx, x, c), (xy, y, x), (yz, z, y) {
+    .#{$pair}::before {
+      content: var(--#{$pair});
+      color: var(--#{$from}-bg);
+      background-color: var(--#{$to}-bg);
+    }
+  }
+
+  .component-separator::before {
+    content: var(--component-separator);
+  }
+
+  .icon-markdown {
+    color: var(--DevIconMd-fg);
+  }
+
+  .icon-help {
+    color: var(--DevIconTxt-fg);
+  }
+}
+
+.vim-float {
+  position: fixed;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: min(60ch, 100vw);
+  padding: 0 1ch;
+  line-height: $lh;
+  color: var(--NormalFloat-fg, $body-text-color);
+  background-color: var(--NormalFloat-bg, var(--Pmenu-bg));
+  border: 1px solid var(--FloatBorder-fg, $gray);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.md > * {
+    margin: 0;
+  }
+}

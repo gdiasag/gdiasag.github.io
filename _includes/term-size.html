@@ -1,0 +1,15 @@
+<td class="term ls-la size mobile-hidden">
+  {% assign size = include.size | plus: 0 %}
+
+  {% if size < 1024 %}
+    {{ size }}
+  {% elsif size < 1048576 %}
+    {{ size | divided_by: 1024 }}k
+  {% elsif size < 1073741824 %}
+    {% assign mb = size | times: 10 | divided_by: 1048576 %}
+    {{ mb | divided_by: 10.0 }}M
+  {% else %}
+    {% assign gb = size | times: 10 | divided_by: 1073741824 %}
+    {{ gb | divided_by: 10.0 }}G
+  {% endif %}
+</td>

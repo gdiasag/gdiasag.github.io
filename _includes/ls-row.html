@@ -1,0 +1,36 @@
+{%- comment -%}
+  One entry of a listing, as `eza -l` prints it: mode, size, owner, date and
+  name. On small screens only the date and the name show.
+
+  Parameters:
+  * mode   (string) - As eza prints it; its first character makes the name a
+                      directory (d), a symlink (l) or a file (anything else)
+  * date   (date)
+  * href   (string) - Where the name leads
+  * name   (string)
+
+  Optional Parameters:
+  * bytes  (number) - Its size, a dash without it
+  * owner  (string) - gustavo, unless given
+  * target (string) - Where a symlink points, when its name does something
+                      else (a theme's name applies the theme)
+  * blank  (bool)   - Blanks the date on small screens, for a second entry of
+                      the same thing
+  * class  (string) - The row's classes
+{%- endcomment -%}
+{%- assign kind = include.mode | slice: 0 -%}
+{%- case kind -%}
+  {%- when "d" -%}{%- assign kind = "dir" -%}
+  {%- when "l" -%}{%- assign kind = "symlink" -%}
+  {%- else -%}{%- assign kind = "file" -%}
+{%- endcase -%}
+<tr{% if include.class %} class="{{ include.class }}"{% endif %}>
+  <td class="term ls-la mobile-hidden">{% include term-perms.html mode=include.mode %}</td>
+  {% if include.bytes %}{% include term-size.html size=include.bytes %}{% else %}<td class="term ls-la size none mobile-hidden">-</td>{% endif %}
+  <td class="term ls-la author mobile-hidden">{{ include.owner | default: "gustavo" }}</td>
+  <td class="term ls-la date{% if include.blank %} mobile-blank{% endif %}">{{ include.date | date: "%b" }}&nbsp;{{ include.date | date: "%_e%t%Y" }}</td>
+  <td>
+    <a class="term-nav {{ kind }}" href="{{ include.href }}">{{ include.name }}</a>
+    {%- if include.target %}<a class="term-nav symlink" href="{{ include.target }}"></a>{% endif %}
+  </td>
+</tr>

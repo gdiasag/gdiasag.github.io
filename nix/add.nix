@@ -13,7 +13,7 @@
 
         text = ''
           exec python3 ${../scripts/add.py} "$@"
-        ''
-      }
-    }
+        '';
+      };
+    };
 }

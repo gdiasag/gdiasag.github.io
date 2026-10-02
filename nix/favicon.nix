@@ -4,7 +4,7 @@ let
     favicon
     defaultTheme
     ;
-  inherit (import ./utils.nix) fontFile;
+  inherit (import ./lib.nix) fontFile;
 in
 {
   options.site.favicon = lib.mkOption {

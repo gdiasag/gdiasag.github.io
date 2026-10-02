@@ -51,8 +51,6 @@ let
           default = "";
           description = "Vim commands to run before loading it.";
         };
-
-        # What the themes page lists: the plugin's pinned commit and its date.
         source = mkOption {
           type = types.path;
           readOnly = true;
@@ -87,11 +85,11 @@ in
     themes = mkOption {
       type = types.attrsOf (types.submodule theme);
       default = { };
-      description = "The site's themes, by name.";
+      description = "The site's themes.";
     };
     defaultTheme = mkOption {
       type = types.enum (builtins.attrNames config.site.themes);
-      description = "The theme a visitor sees before picking one.";
+      description = "Default dark-mode theme";
     };
     defaultLightTheme = mkOption {
       type = types.nullOr (
@@ -100,7 +98,7 @@ in
         )
       );
       default = null;
-      description = "The theme a visitor whose system is in light mode sees instead, if any.";
+      description = "Default light-mode theme";
     };
   };
 

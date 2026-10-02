@@ -1,0 +1,28 @@
+---
+layout: null
+permalink: /files.json
+---
+{%- comment -%}
+  Every file and directory `:edit` opens (js/vim/commands.js), named as
+  lualine and the prompt name them, with where each leads.
+{%- endcomment -%}
+{%- assign entries = "" | split: "" -%}
+{%- comment -%} Markdown and help pages only: in Liquid, a `layout: null`
+  page still reads as the default layout. {%- endcomment -%}
+{%- for page in site.pages -%}
+  {%- assign extension = page.name | split: "." | last -%}
+  {%- unless extension == "md" or extension == "txt" -%}{%- continue -%}{%- endunless -%}
+  {%- if page.layout == "dir" -%}
+    {%- assign name = page.pwd | append: "/" -%}
+  {%- else -%}
+    {%- assign name = page.path -%}
+  {%- endif -%}
+  {%- capture entry %}{{ name | jsonify }}: {{ page.url | jsonify }}{% endcapture -%}
+  {%- assign entries = entries | push: entry -%}
+{%- endfor -%}
+{%- for post in site.posts -%}
+  {%- capture name %}{{ post.pwd }}/{{ post.path | split: "/" | last }}{% endcapture -%}
+  {%- capture entry %}{{ name | jsonify }}: {{ post.url | jsonify }}{% endcapture -%}
+  {%- assign entries = entries | push: entry -%}
+{%- endfor -%}
+{ {{ entries | join: ", " }} }

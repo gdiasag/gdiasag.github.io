@@ -14,10 +14,10 @@ in
     let
       colorscheme =
         name: theme:
-        pkgs.runCommand "colorscheme-${name}.scsss" { } ''
+        pkgs.runCommand "colorscheme-${name}.scss" { } ''
           export HOME=$TMPDIR
           ${lib.getExe config.packages.neovim} \
-            --cmd 'set rtp^=${theme.source},${pins.lualine.source},${pins.nvim-web.devicons.source}' \
+            --cmd 'set rtp^=${theme.source},${pins.lualine.source},${pins.nvim-web-devicons.source}' \
             -l ${../_nvim/theme.lua} \
             ${
               lib.escapeShellArgs [

@@ -18,8 +18,11 @@ export function goToLine(line) {
   scrollTo(0, start + (line - 1) * lineHeight);
 }
 
+// Markdown headings, or the "===" and "---" lines that start a help section.
+const headings = "h1, h2, h3, h4, h5, h6, .line:has(> :is(.markup-heading-1-delimiter, .markup-heading-2-delimiter))";
+
 export function heading(step) {
-  const lines = [...(buffer ?? document).querySelectorAll("main :is(h1, h2, h3, h4, h5, h6)")].map((h) => {
+  const lines = [...(buffer ?? document).querySelectorAll(`main :is(${headings})`)].map((h) => {
     return h.getBoundingClientRect().top + parseFloat(getComputedStyle(h).paddingTop);
   });
   const target = step > 0 ? lines.find((top) => top > 1) : lines.findLast((top) => top < -1);

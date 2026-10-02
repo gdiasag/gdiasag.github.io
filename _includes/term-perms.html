@@ -1,0 +1,22 @@
+{%- comment -%}
+  A mode like drwxr-xr-x, split so each bit takes the color eza gives it (see
+  .perms in _sass/term.scss): the kind (d, l or . for a file), then r, w, x or
+  - for the owner, the group and everyone else.
+
+  Parameters:
+  * mode (string) - The mode, as `eza -l` prints it
+{%- endcomment -%}
+{%- assign bits = include.mode | split: "" -%}
+<span class="perms">
+  {%- for bit in bits -%}
+    {%- if forloop.first -%}
+      {%- case bit -%}
+        {%- when "d" -%}<span class="dir">d</span>
+        {%- when "l" -%}<span class="symlink">l</span>
+        {%- else -%}<span class="file">{{ bit }}</span>
+      {%- endcase -%}
+    {%- else -%}
+      <span class="{% if bit == '-' %}none{% else %}{{ bit }}{% endif %}">{{ bit }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+</span>

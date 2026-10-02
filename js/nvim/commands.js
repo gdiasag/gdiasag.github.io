@@ -53,6 +53,7 @@ export function complete(text) {
     const names = Object.keys(options);
     return { start: before.length, items: matching([...names, ...names.map((o) => `no${o}`)]) };
   }
+  if (expands(name, "help")) return { start: before.length, items: matching(tags) };
   return { start: 0, items: [] };
 }
 
@@ -73,13 +74,21 @@ export function cancel() {
   previewing = null;
 }
 
+const helpfile = "/quickref";
+
 let files = {};
+let tags = [];
 let fetching = null;
 
 export const prefetch = () =>
-  (fetching ??= fetch("/files.json")
-    .then((response) => response.json())
-    .then((listed) => (files = listed))
+  (fetching ??= Promise.all([
+    fetch("/files.json").then((response) => response.json()),
+    fetch(helpfile).then((response) => response.text()),
+  ])
+    .then(([listed, help]) => {
+      files = listed;
+      tags = [...new DOMParser().parseFromString(help, "text/html").querySelectorAll(".label[id]")].map((t) => t.id);
+    })
     .catch(() => (fetching = null)));
 
 async function edit(name) {
@@ -97,11 +106,19 @@ function colorscheme(name) {
   window.colorscheme.apply(name);
 }
 
-function help() {
-  message(
-    ":e[dit] {file}  :colo[rscheme] {name}  :se[t] [no]{number,cursorline,wrap}  :{line}  :noh  :ve[rsion]  :q" +
-      "  |  j k d u f b g G  ]] [[  /{pattern} ?{pattern} n N  K  q",
-  );
+async function help(subject) {
+  if (!subject) return (location.href = helpfile);
+  await prefetch();
+  const tag = helptag(subject);
+  if (!tag) return message(`E149: Sorry, no help for ${subject}`, "error");
+  location.href = `${helpfile}#${tag}`;
+}
+
+// The tag for {subject}: itself, or the option or command it names.
+function helptag(subject) {
+  const name = subject.replace(/^:/, "");
+  const command = Object.keys(commands).find((full) => expands(name, full));
+  return [subject, `'${subject}'`, command && `:${commands[command][0]}`].find((tag) => tags.includes(tag));
 }
 
 function version() {

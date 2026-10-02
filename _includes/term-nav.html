@@ -1,0 +1,16 @@
+{% include term-prompt.html cmd='eza -l --no-user --no-filesize --no-time' %}
+<table class="term">
+  {% for nav in site.nav %}
+  <tr>
+    <td class="term ls-la">
+    {% case nav.kind %}
+      {% when "dir" %}{% include term-perms.html mode="drwxr-xr-x" %}
+      {% when "file" %}{% include term-perms.html mode=".rw-r--r--" %}
+      {% when "symlink" %}{% include term-perms.html mode="lrwxrwxrwx" %}
+    {% endcase %}
+    </td>
+    <td><a class="term-nav {{nav.kind}}" href="{{nav.href}}">{{ nav.name }}</a></td>
+  </tr>
+  {% endfor %}
+</table>
+<br/>

@@ -1,0 +1,134 @@
+---
+layout: file
+title: gustavos.terminal/quickref.txt
+filetype: help
+render_with_liquid: false
+---
+*quickref.txt*	For gustavos.terminal.  Last change: 2026 Oct 02
+
+
+		  TERMINAL REFERENCE MANUAL	  by Gustavo Aguiar
+
+
+			     Quick reference guide
+
+							   *quickref* *Contents*
+ tag	  subject			 tag	  subject	~
+|Q_sc|	Scrolling			|Q_op|	Options
+|Q_ud|	Up-down motions			|Q_ed|	Editing a file
+|Q_pa|	Pattern searches		|Q_wq|	Writing and quitting
+|Q_ce|	Command-line editing		|Q_vc|	Various commands
+
+--------------------------------------------------------------------------------
+There is no cursor: motions scroll the page instead.
+--------------------------------------------------------------------------------
+*Q_sc*		Scrolling
+
+*j*	j		scroll one line downwards
+*k*	k		scroll one line upwards
+*d*	d		scroll half a screen Downwards
+*u*	u		scroll half a screen Upwards
+*f*	f		scroll a screen Forwards (downwards)
+*b*	b		scroll a screen Backwards (upwards)
+
+These keys work as in less(1): "d", "u", "f" and "b" need no CTRL, while Vim
+scrolls with CTRL-D, CTRL-U, CTRL-F and CTRL-B.
+--------------------------------------------------------------------------------
+*Q_ud*		Up-down motions
+
+*g*	g		goto the first line
+*G*	G		goto the last line
+	:{number}	goto line {number}
+*<*	<		same as "g"
+*>*	>		same as "G"
+*]]*	]]		forward to the next section
+*[[*	[[		backward to the previous section
+--------------------------------------------------------------------------------
+*Q_pa*		Pattern searches
+
+*/*	/{pattern}<CR>	search forward for {pattern}
+*?*	?{pattern}<CR>	search backward for {pattern}
+*/<CR>*	/<CR>		repeat last search, in the forward direction
+*?<CR>*	?<CR>		repeat last search, in the backward direction
+*n*	n		repeat last search
+*N*	N		repeat last search, in opposite direction
+*:noh*	:noh[lsearch]	stop highlighting the matches
+
+{pattern} is a JavaScript regular expression, or plain text when it is not a
+valid one.  Case is ignored, unless {pattern} has an uppercase letter.  Matches
+are highlighted while it is typed, and a search that hits the end of the file
+continues at the other end.
+--------------------------------------------------------------------------------
+*Q_ce*		Command-line editing
+
+*:*		:		   start entering an Ex command
+*c_<CR>*	<CR>		   execute entered command
+*c_<Esc>*	<Esc>		   abandon command-line
+*c_<BS>*	<BS>		   delete the character in front of the cursor
+				      (or abandon an empty command-line)
+*c_<Up>*	<Up>/<Down>	   recall older/newer command-line
+*c_<Tab>*	<Tab>		   do completion on the pattern in front of the
+				      cursor; if there are multiple matches,
+				      show the first one in a menu; further
+				      <Tab> will show the next ones
+*c_<S-Tab>*	<S-Tab>		   like <Tab>, but begin with the last match and
+				      then go to the previous match
+
+Clicking the status line starts entering an Ex command too.
+
+<Tab> completes the commands, the files of |:e|, the color schemes of |:colo|,
+the options of |:se| and the tags of |:h|.  The command-line of "/" and "?"
+takes the same keys, except <Tab>.
+--------------------------------------------------------------------------------
+*Q_op*		Options
+
+*:se*	:se[t]			show all modified options
+	:se[t] {option}		set boolean option (switch it on)
+	:se[t] no{option}	reset boolean option (switch it off)
+	:se[t] inv{option}	invert boolean option
+	:se[t] {option}!	invert boolean option
+	:se[t] {option}?	show value of {option}
+
+More than one {option} can be given.  The browser remembers them for every page.
+
+Short explanation of each option:		*option-list*
+*'cursorline'*	*'cul'*	highlight the line of code under the mouse pointer
+*'number'*	*'nu'*	print the line number in front of each line of code
+*'wrap'*		long lines of code wrap and continue on the next line
+--------------------------------------------------------------------------------
+*Q_ed*		Editing a file
+
+*:e*	:e[dit] {file}		edit {file}
+	:e[dit]			reload the current file
+
+{file} is a path from the root of the site, like "preface.md" or "notes/".
+--------------------------------------------------------------------------------
+*Q_wq*		Writing and quitting
+
+	   Every file is read-only: writing always fails.
+*:w*	:w[rite][!]		write to the current file
+*:wq*	:wq[!]			write the current file and quit
+*:x*	:x[it]			like ":wq" but write only when changes have
+				   been made
+*:q*	:q[uit]			quit the current file, back to its directory
+*q*	q			same as ":q"
+--------------------------------------------------------------------------------
+*Q_vc*		Various commands
+
+*K*	K			show the footnote under the mouse pointer in a
+				   floating window
+*<Esc>*	<Esc>			clear the message line
+*:colo*	:colo[rscheme]		show current color scheme
+	:colo[rscheme] {name}	load color scheme {name}
+*:ve*	:ve[rsion]		show version information
+*:h*	:h[elp]			open this file
+	:h[elp] {subject}	open this file at the tag {subject}
+
+The page shows each color scheme while {name} is typed, and the browser keeps
+the one loaded.  ":e themes/" lists them all.
+
+{subject} is a tag in this file, like "j" or ":se".  Any name of a command or
+option finds its tag: ":set", "set" and "se" all find |:se|, and "number" finds
+'number'.
+
+ vim:tw=80:ts=8:noet:ft=help:norl:

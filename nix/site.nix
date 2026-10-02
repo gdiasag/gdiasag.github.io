@@ -10,7 +10,7 @@ let
     defaultLightTheme
     data
     ;
-  inherit (import ./utils.nix) timestamp fontFile;
+  inherit (import ./lib.nix) timestamp fontFile;
 in
 {
   perSystem =
@@ -24,7 +24,7 @@ in
       buildConfig = pkgs.writeText "_config.build.yml" (
         builtins.toJSON (
           {
-            time = timestamp (self.astModifiedDate or "19700101000000");
+            time = timestamp (self.lastModifiedDate or "19700101000000");
             build = {
               branch = "main";
               revision = self.rev or self.dirtyRev or "unknown";
@@ -52,7 +52,7 @@ in
         name = "site";
 
         src = lib.fileset.toSource {
-          root = "../.";
+          root = ../.;
           fileset = lib.fileset.difference ../. (
             lib.fileset.unions [
               ../flake.nix

@@ -1,0 +1,50 @@
+{% assign default = site.themes | where: "default", true | first %}
+<!DOCTYPE html>
+{% capture description %}{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}{% endcapture %}
+<html lang="en" data-theme="{{ default.name }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    {% feed_meta %}
+
+    <!-- How links to the page preview -->
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ page.title | escape }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="{% if page.collection == "posts" %}article{% else %}website{% endif %}">
+
+    <!-- Applies the saved theme before the page paints -->
+    <script src="/js/themes.js"></script>
+
+    <!-- What `:version` reports (js/vim/commands.js) -->
+    <script type="application/json" id="build">
+      {"branch": {{ site.build.branch | jsonify }}, "revision": {{ site.build.revision | jsonify }},
+       "time": {{ site.time | date_to_xmlschema | jsonify }}, "jekyll": {{ jekyll.version | jsonify }},
+       "ruby": {{ site.build.ruby | jsonify }}, "neovim": {{ site.build.neovim | jsonify }}}
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="preload" href="{{ site.font.regular }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body class="site md">
+    <!-- begin subtemplate -->
+    {% include anchor-headings.html
+      html=content
+      anchorBody=""
+      beforeHeading=true
+      anchorClass="anchor"
+      anchorAttrs='aria-hidden="true" tabindex="-1"'
+    %}
+    <!-- end subtemplate -->
+    <script type="module" src="/js/nvim/main.js"></script>
+    {%- if site.goatcounter and jekyll.environment == "production" %}
+    <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    {%- endif %}
+  </body>
+</html>

@@ -4,9 +4,9 @@ import { buffer, position } from "./pager.js";
 const { branch } = JSON.parse(document.getElementById("build").textContent);
 const modes = { normal: "NORMAL", command: "COMMAND", visual: "VISUAL" };
 
-const icons = { branch: "", unix: "", markdown: "" };
+const icons = { branch: "", unix: "", markdown: "", help: "󰈙" };
 
-const open = buffer?.dataset.filetype === "markdown";
+const open = Boolean(buffer?.dataset.filetype);
 statusline.hidden = !open;
 
 let mode = "normal";

@@ -14,6 +14,11 @@ module NeovimHighlighter
     type == :block ? block(html) : %(<span class="highlight">#{html}</span>)
   end
 
+  def self.command(config)
+    opts = config.dig("kramdown", "syntax_highlighter_opts") || {}
+    opts[:command] || opts["command"]
+  end
+
   def self.block(html)
     %(<div class="highlight"><pre class="highlight"><code>#{html}</code></pre></div>)
   end
@@ -62,13 +67,13 @@ module NeovimHighlighter
 
   module Filter
     def neovim(text, lang)
-      opts = @context.registers[:site].config.dig("kramdown", "syntax_highlighter_opts") || {}
-      html = NeovimHighlighter.highlight(opts[:command] || opts["command"], lang, text.to_s)
+      command = NeovimHighlighter.command(@context.registers[:site].config)
+      html = NeovimHighlighter.highlight(command, lang, text.to_s)
       NeovimHighlighter.block(html || CGI.escapeHTML(text.to_s))
     end
   end
 end
 
-Kramdown::Converter.add_syntax_highlighter(:neovim, NeovimHighlighter)
+Kramdown::Converter.add_syntax_highlighter(:treesitter, NeovimHighlighter)
 
 Liquid::Template.register_filter(NeovimHighlighter::Filter)

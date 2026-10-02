@@ -1,0 +1,78 @@
+title: gustavo's terminal
+url: https://gdiasag.github.io
+baseurl: ""
+repository: gdiasag/gdiasag.github.io
+author: &default_author
+  name: Gustavo Aguiar
+  url: https://gdiasag.github.io
+  email: gdiasag@gmail.com
+
+permalink: "/:title.html"
+
+encoding: utf-8
+
+markdown: kramdown
+
+nav:
+  - name: "notes"
+    href: "/notes/"
+    kind: "dir"
+  - name: "slides"
+    href: "/slides/"
+    kind: "dir"
+  - name: "books"
+    href: "/books/"
+    kind: "dir"
+  - name: "themes"
+    href: "/themes/"
+    kind: "dir"
+  - name: "preface.md"
+    href: "/"
+    kind: "file"
+  - name: "afterword.md"
+    href: "/afterword"
+    kind: "file"
+  - name: "quickref.txt"
+    href: "/quickref"
+    kind: "file"
+  - name: "code"
+    href: "https://github.com/gdiasag"
+    kind: "symlink"
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "file"
+      author: *default_author
+  - scope:
+      path: "notes"
+      type: "posts"
+    values:
+      layout: "post"
+      author: *default_author
+      pwd: "notes"
+      permalink: "/notes/:title.html"
+
+plugins:
+  - jekyll-feed
+
+kramdown:
+  syntax_highlighter: treesitter
+  input: GFM
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..4
+
+exclude:
+  - "README.md"
+  - "*.nix"
+  - ".bundle"
+  - ".direnv"
+  - "vendor"
+  - "nix"
+  - "npins"
+  - "result"
+  - "fonts"

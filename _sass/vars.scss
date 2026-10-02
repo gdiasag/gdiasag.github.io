@@ -1,0 +1,25 @@
+@use "font";
+
+$body-text-color: var(--Normal-fg);
+$background: var(--Normal-bg);
+$gray: var(--bright-black);
+$light-gray: var(--Visual-bg);
+$cursor: var(--Cursor-bg, var(--Normal-fg));
+
+$link-color: var(--yellow);
+
+@function soft($color) {
+  @return color-mix(in srgb, #{$color} 62%, #{$background});
+}
+
+$dir-color: var(--Directory-fg, #{$body-text-color});
+$file-color: $body-text-color;
+$symlink-color: soft(var(--cyan));
+
+$font-size-base: 12pt;
+$font-family-code: font.$family, "Symbols Nerd Font Mono", monospace, serif;
+$font-family: $font-family-code;
+
+$lh: 1.5rem;
+$max-width: 80ch;
+$breakpoint-wide: $max-width + 12ch;

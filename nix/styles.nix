@@ -19,7 +19,7 @@
             font = "${pkgs.nerd-fonts.symbols-only}/share/fonts/truetype/NerdFonts/Symbols/SymbolsNerdFontMono-Regular.ttf";
           }
           ''
-            pyftsubset "$font" --unicodes=U+E0A0,U+E712,U+F48A --flavor=woff2 --output-file=symbols.woff2
+            pyftsubset "$font" --unicodes=U+E0A0,U+E712,U+F48A,U+F0219 --flavor=woff2 --output-file=symbols.woff2
 
             mkdir $out
 
@@ -27,7 +27,7 @@
             @font-face {
               font-family: "Symbols Nerd Font Mono";
               src: url(data:font/woff2;base64,$(base64 -w0 symbols.woff2)) format("woff2");
-              unicode-range: U+E0A0, U+E712, U+F48A;
+              unicode-range: U+E0A0, U+E712, U+F48A, U+F0219;
             }
             EOF
           '';

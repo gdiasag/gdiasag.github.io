@@ -1,0 +1,36 @@
+---
+layout: common
+---
+{% comment %}
+  A file, as `bat -p` prints it: its front matter, then its content. Posts,
+  preface.md and afterword.md all read this way. Help files (quickref.txt)
+  leave the front matter out, as `:help` would.
+{% endcomment %}
+{% assign filetype = page.filetype | default: "markdown" %}
+{% assign file = page.source.name %}
+{% assign bat = file | prepend: "bat -p " %}
+{% if page.pwd %}{% assign path = page.pwd | append: "/" | append: file %}{% else %}{% assign path = file %}{% endif %}
+<header class="term">
+  {% include term-nav.html %}
+  {% include term-prompt.html pwd=page.pwd cmd=bat %}
+  <br />
+  <br />
+</header>
+
+<article class="content" data-file="{{ path }}" data-filetype="{{ filetype }}"
+  {%- if page.pwd %} data-parent="/{{ page.pwd }}/"{% endif %}
+  {%- if page.collection == "posts" %} itemscope itemtype="http://schema.org/BlogPosting"{% endif %}>
+  {% if page.collection == "posts" %}
+    <h1 class="visually-hidden" itemprop="name headline">{{ page.title }}</h1>
+    <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">
+  {% endif %}
+
+  {% unless filetype == "help" %}{{ page.source.front_matter | neovim: "yaml" }}{% endunless %}
+
+  <main itemprop="articleBody">
+    <!-- begin content -->
+    {{ content }}
+    <!-- end content -->
+  </main>
+</article>
+{% include term-footer.html %}

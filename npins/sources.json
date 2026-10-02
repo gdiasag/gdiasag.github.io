@@ -1,0 +1,137 @@
+{
+  "pins": {
+    "ayu": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Shatur",
+        "repo": "neovim-ayu"
+      },
+      "branch": "master",
+      "revision": "e5a9f0fa2918d6b5f57c21b3ac014314ee5e41c8",
+      "url": "https://github.com/Shatur/neovim-ayu/archive/e5a9f0fa2918d6b5f57c21b3ac014314ee5e41c8.tar.gz",
+      "hash": "1rpyhfivnn3wpfdgw8ivk44vb4k26a10nkzsh3yg8gnqjnbz779g"
+    },
+    "everforest": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "sainnhe",
+        "repo": "everforest"
+      },
+      "branch": "master",
+      "revision": "85a86eb62409e3ec88713bff3d1b9d7374e112e4",
+      "url": "https://github.com/sainnhe/everforest/archive/85a86eb62409e3ec88713bff3d1b9d7374e112e4.tar.gz",
+      "hash": "1cs9jm9cq4cyv7v68b3xhprj4nri0fpzc92fblyjnffa5xlakknv"
+    },
+    "gruvbox-material": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "sainnhe",
+        "repo": "gruvbox-material"
+      },
+      "branch": "master",
+      "revision": "11d779b26a9ab2b3db8c22c6ac9fb6e8ed4fea79",
+      "url": "https://github.com/sainnhe/gruvbox-material/archive/11d779b26a9ab2b3db8c22c6ac9fb6e8ed4fea79.tar.gz",
+      "hash": "1kjwvfpfw46bw59y83mw595hl0dajs22hqf0kx80m7hji18my843"
+    },
+    "iceberg": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "cocopon",
+        "repo": "iceberg.vim"
+      },
+      "branch": "master",
+      "revision": "23835d5ed696436f716cbfdb56a93a7850fe3b18",
+      "url": "https://github.com/cocopon/iceberg.vim/archive/23835d5ed696436f716cbfdb56a93a7850fe3b18.tar.gz",
+      "hash": "04cw04yirvbfq1l7wbavpnx46830qsp3cgx6rqidhhj794pn3xvc"
+    },
+    "kanagawa": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim"
+      },
+      "branch": "master",
+      "revision": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
+      "url": "https://github.com/rebelot/kanagawa.nvim/archive/bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3.tar.gz",
+      "hash": "1pjc69f9zxkbhji1794p8383cv9nmsjcp1s66rf5c3wa80szihvw"
+    },
+    "lualine": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim"
+      },
+      "branch": "master",
+      "revision": "221ce6b2d999187044529f49da6554a92f740a96",
+      "url": "https://github.com/nvim-lualine/lualine.nvim/archive/221ce6b2d999187044529f49da6554a92f740a96.tar.gz",
+      "hash": "100jgcrv4k1rivszx2xd51qb2hxra20rhdvlzkg8yxq4gnxwdy78"
+    },
+    "melange": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "savq",
+        "repo": "melange-nvim"
+      },
+      "branch": "master",
+      "revision": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
+      "url": "https://github.com/savq/melange-nvim/archive/ce42f6b629beeaa00591ba73a77d3eeac4cf28ce.tar.gz",
+      "hash": "008wfwradxblsg8adwmgmysb2qypv77jssn30x31rxfw8s18hrz1"
+    },
+    "nvim-web-devicons": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons"
+      },
+      "branch": "master",
+      "revision": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
+      "url": "https://github.com/nvim-tree/nvim-web-devicons/archive/58447c1fca354bbf184425e4a8d01deecbd6f3c4.tar.gz",
+      "hash": "1xw4zjx0jqkc3dnizfsl9w3gxpmji54c3bf3f3y691zp24ivbc78"
+    },
+    "onedark": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "navarasu",
+        "repo": "onedark.nvim"
+      },
+      "branch": "master",
+      "revision": "df4792accde9db0043121f32628bcf8e645d9aea",
+      "url": "https://github.com/navarasu/onedark.nvim/archive/df4792accde9db0043121f32628bcf8e645d9aea.tar.gz",
+      "hash": "0dzkar8iqn4jf11fk48lj5c5mw66rs8h6d1c7nn736wzz93rgqm8"
+    },
+    "papercolor": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NLKNguyen",
+        "repo": "papercolor-theme"
+      },
+      "branch": "master",
+      "revision": "0cfe64ffb24c21a6101b5f994ca342a74c977aef",
+      "url": "https://github.com/NLKNguyen/papercolor-theme/archive/0cfe64ffb24c21a6101b5f994ca342a74c977aef.tar.gz",
+      "hash": "1w6j57lri4r79igzi5rvvfv93c3pb4lrvvcg95gpa9rg122plw15"
+    },
+    "solarized": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "maxmx03",
+        "repo": "solarized.nvim"
+      },
+      "branch": "main",
+      "revision": "a8085e29883ddcfb39bd46197eb32ef00df05368",
+      "url": "https://github.com/maxmx03/solarized.nvim/archive/a8085e29883ddcfb39bd46197eb32ef00df05368.tar.gz",
+      "hash": "0psgwfnd5fi0p60pknzz9li70ryxqqjz7gxxvqr0q3q1kzpdhr7q"
+    }
+  },
+  "version": 3
+}
